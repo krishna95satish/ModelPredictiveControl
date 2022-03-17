@@ -1,0 +1,24 @@
+car_tuk_node:
+  ros__parameters:
+    use_sim_time: false
+    topics:
+      subscriber:
+        gnss: "/aorta/car_info/filtered/tuk/gnss"
+        trajectory: "/aorta/trajectory/filtered/tuk"
+        objects: "/aorta/car_info/filtered/tuk/objects"
+        image: "/carla/tuk/rgb_front/image"
+        camera_info: "/carla/tuk/rgb_front/camera_info"
+        lidar: "/carla/tuk/lidar"
+        odometry: "/carla/tuk/odometry"
+        vehicle_status: "/carla/tuk/vehicle_status"
+        vehicle_info: "/carla/tuk/vehicle_info"
+        tof_sensor: "/aorta/sensors/tuk/tof"
+      publisher:
+        gnss: "/aorta/car_info/tuk/gnss"
+        objects: "/aorta/car_info/tuk/objects"
+        control: "/carla/tuk/vehicle_control_cmd"
+        waypoint: "/carla/tuk/waypoints"
+        waypoint_speed: "/carla/tuk/speed_command"
+    car:
+      speed: 10.0
+      

@@ -1,0 +1,24 @@
+car_akka_node:
+  ros__parameters:
+    use_sim_time: false
+    topics:
+      subscriber:
+        gnss: "/aorta/car_info/filtered/akka/gnss"
+        trajectory: "/aorta/trajectory/filtered/akka"
+        objects: "/aorta/car_info/filtered/akka/objects"
+        image: "/carla/akka/rgb_front/image"
+        camera_info: "/carla/akka/rgb_front/camera_info"
+        lidar: "/carla/akka/lidar"
+        odometry: "/carla/akka/odometry"
+        vehicle_status: "/carla/akka/vehicle_status"
+        vehicle_info: "/carla/akka/vehicle_info"
+        tof_sensor: "/aorta/sensors/akka/tof"
+      publisher:
+        gnss: "/aorta/car_info/akka/gnss"
+        objects: "/aorta/car_info/akka/objects"
+        control: "/carla/akka/vehicle_control_cmd"
+        waypoint: "/carla/akka/waypoints"
+        waypoint_speed: "/carla/akka/speed_command"
+    car:
+      speed: 10.0
+      

@@ -1,0 +1,4 @@
+trajectory_planning_node:
+  ros__parameters:
+    use_sim_time: true 
+    publish_all_trajectories: false

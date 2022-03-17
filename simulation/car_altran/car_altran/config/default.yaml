@@ -1,0 +1,23 @@
+car_altran_node:
+  ros__parameters:
+    use_sim_time: false
+    topics:
+      subscriber:
+        gnss: "/aorta/car_info/filtered/altran/gnss"
+        trajectory: "/aorta/trajectory/filtered/altran"
+        objects: "/aorta/car_info/filtered/altran/objects"
+        image: "/carla/altran/rgb_front/image"
+        camera_info: "/carla/altran/rgb_front/camera_info"
+        lidar: "/carla/altran/lidar"
+        odometry: "/carla/altran/odometry"
+        vehicle_status: "/carla/altran/vehicle_status"
+        vehicle_info: "/carla/altran/vehicle_info"
+      publisher:
+        gnss: "/aorta/car_info/altran/gnss"
+        objects: "/aorta/car_info/altran/objects"
+        control: "/carla/altran/vehicle_control_cmd"
+        waypoint: "/carla/altran/waypoints"
+        waypoint_speed: "/carla/altran/speed_command"
+    car:
+      speed: 10.0
+      

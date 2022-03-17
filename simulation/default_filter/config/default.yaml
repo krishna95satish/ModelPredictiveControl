@@ -1,0 +1,18 @@
+default_filter_node:
+  ros__parameters:
+    use_sim_time: false
+    topics:
+      publisher:
+        trajectory: "/aorta/trajectory/filtered/default"
+      subscriber:
+        trajectory: "/aorta/trajectory/default"
+    communication:
+      objects:
+        drop_probability: 0.0
+        delay_probability: 0.0
+        delay_time_ms: 0
+      trajectory:
+        drop_probability: 0.0
+        delay_probability: 0.0
+        delay_time_ms: 0
+      

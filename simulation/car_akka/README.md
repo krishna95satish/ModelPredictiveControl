@@ -1,0 +1,84 @@
+# car_akka
+## Interfaces
+### Publishes:
+<table>
+    <tr>
+        <td>Type</td>
+        <td>Topic</td>
+    </tr>
+    <tr>
+        <td>NavSatFix</td>
+        <td>'/aorta/car_info/akka/gnss'</td>
+    </tr>
+    <tr>
+        <td>ObjectList</td>
+        <td>'/aorta/car_info/akka/objects'</td>
+    </tr>
+    <tr>
+        <td>CarlaEgoVehicleControl</td>
+        <td>'/carla/akka/vehicle_control_cmd'</td>
+    </tr>
+    <tr>
+        <td>Path</td>
+        <td>'/carla/akka/waypoints'</td>
+    </tr>
+    <tr>
+        <td>Float64</td>
+        <td>'/carla/akka/speed_command'</td>
+    </tr>
+</table>
+
+### Subscribes to:
+<table>
+    <tr>
+        <td>Type</td>
+        <td>Topic</td>
+        <td>Callback</td>
+    </tr>
+    <tr>
+        <td>Trajectory</td>
+        <td>'/aorta/trajectory/filtered/akka'</td>
+        <td>trajectory_callback</td>
+    </tr>
+    <tr>
+        <td>Image</td>
+        <td>'/carla/akka/rgb_front/image'</td>
+        <td>image_callback</td>
+    </tr>
+    <tr>
+        <td>CameraInfo</td>
+        <td>'/carla/akka/rgb_front/camera_info'</td>
+        <td>camera_info_callback</td>
+    </tr>
+    <tr>
+        <td>PointCloud2</td>
+        <td>'/carla/akka/lidar'</td>
+        <td>lidar_callback</td>
+    </tr>
+    <tr>
+        <td>NavSatFix</td>
+        <td>'/carla/akka/gnss'</td>
+        <td>carla_gnss_callback</td>
+    </tr>
+    <tr>
+        <td>Odometry</td>
+        <td>'/carla/akka/odometry'</td>
+        <td>odometry_callback</td>
+    </tr>
+    <tr>
+        <td>CarlaEgoVehicleStatus</td>
+        <td>'/carla/akka/vehicle_status'</td>
+        <td>ego_vehicle_callback</td>
+    </tr>
+    <tr>
+        <td>CarlaEgoVehicleInfo</td>
+        <td>'/carla/akka/vehicle_info'</td>
+        <td>ego_wheels_callback</td>
+    </tr>
+    <tr>
+        <td>AkkaSensor</td>
+        <td>'/aorta/sensors/akka/tof'</td>
+        <td>akka_sensor_callback</td>
+    </tr>
+</table>
+

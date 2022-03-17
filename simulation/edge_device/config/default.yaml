@@ -1,0 +1,10 @@
+edge_device_node:
+  ros__parameters:
+    use_sim_time: false
+    topics:
+      subscriber:
+        image: "/carla/edge_camera/image"
+        camera_info: "/carla/edge_camera/camera_info"
+      publisher:
+        objects: "/aorta/edge/objects"
+      

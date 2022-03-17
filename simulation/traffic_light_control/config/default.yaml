@@ -1,0 +1,38 @@
+traffic_light_control_node:
+  ros__parameters:
+    use_sim_time: true 
+    topics:
+      subscriber:
+        program: "/aorta/control/traffic_light/program"
+      publisher:
+        control: "/aorta/control/traffic_light/control"
+    programs:
+        1:
+          - >-
+              {"time": 5.5, "id":[0,1,2,3,4], "state":[0,1,1,0,0]}          
+          - >-
+              {"time": 10, "id":[0,1,2,3,4], "state":[0,1,1,1,0]}          
+          - >-
+              {"time": 15.5, "id":[0,1,2,3,4], "state":[0,0,0,0,0]}          
+        2:
+          - >-
+              {"time": 2.5, "id":[3,4,6,3,4], "state":[0,1,1,0,0]}          
+          - >-
+              {"time": 5, "id":[3,4,6,3,4], "state":[0,1,1,1,0]}          
+          - >-
+              {"time": 2.5, "id":[3,4,6,3,4], "state":[0,0,0,0,0]}          
+        3:
+          - >-
+              {"time": 0, "id":[116,117], "state":[1,0]}
+          - >-
+              {"time": 1, "id":[116], "state":[2]}
+          - >-
+              {"time": 10, "id":[116], "state":[1]}
+          - >-
+              {"time": 1, "id":[116,117], "state":[0,1]}             
+          - >-
+              {"time": 1, "id":[117], "state":[2]}             
+          - >-
+              {"time": 10, "id":[117], "state":[1]}             
+          - >-
+              {"time": 1, "id":[117], "state":[0]}             

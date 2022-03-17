@@ -1,0 +1,41 @@
+name: Create Release Package for AD-Map QGIS Plugin
+
+on:
+  release:
+    types: [published]
+  push:
+    branches: master
+  pull_request:
+    branches: master
+
+
+jobs:
+  publish:
+    name: Publish AD-Map QGIS Plugin
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Install Dependencies
+      run: bash .github/workflows/install_dependencies.sh
+
+    - name: Build Libraries
+      run: |
+        colcon build --event-handlers console_direct+ --executor sequential --metas colcon_python.meta --packages-up-to ad_map_access_qgis
+
+    - name: Build Package
+      run: |
+        cd install/ad_map_access_qgis/share/qgis/python/plugins/
+        zip -r ad_map_access_qgis.zip ad_map_access_qgis/
+        mv ad_map_access_qgis.zip ../../../../../../
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      if: ${{ github.event_name == 'release'}}
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ad_map_access_qgis.zip
+        tag: ${{ github.ref }}

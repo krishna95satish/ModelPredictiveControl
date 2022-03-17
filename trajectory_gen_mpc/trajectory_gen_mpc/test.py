@@ -1,46 +1,35 @@
-from tkinter import N
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy import interpolate
 
-def recta(x1, y1, x2, y2):
-    a = (y1 - y2) / (x1 - x2)
-    b = y1 - a * x1
-    return (a, b)
+x = [32.04, 32.44]
+y = [104.3, 135.5]
 
-def curva_b(xa, ya, xb, yb, xc, yc):
-    (x1, y1, x2, y2) = (xa, ya, xb, yb)
-    (a1, b1) = recta(xa, ya, xb, yb)
-    (a2, b2) = recta(xb, yb, xc, yc)
-    puntos = []
+x_new = 120.0
 
-    for i in range(0, 1000):
-        if x1 == x2:
-            continue
-        else:
-            (a, b) = recta(x1, y1, x2, y2)
-        x = i*(x2 - x1)/1000 + x1
-        y = a*x + b
-        puntos.append((x,y))
-        x1 += (xb - xa)/1000
-        y1 = a1*x1 + b1
-        x2 += (xc - xb)/1000
-        y2 = a2*x2 + b2
-    return puntos
+y_new = np.interp(x_new, y, x)
+print(y_new)
+# 13.0
 
-def main():
-    lista1 = curva_b(1, 2, 2, 1, 3, 2.5)
-    lista2 = curva_b(1, 2, 2.5, 1.5, 3, 2.5)
-    lista3 = curva_b(1, 2, 2.5, 2, 3, 2.5)
-    lista4 = curva_b(1, 2, 1.5, 3, 3, 2.5)
+plt.plot(x, y, "og-", x_new, y_new, "or")
+plt.show()
 
-    fig, ax = plt.subplots()
-    ax.scatter(*zip(*lista1), s=1, c='b')
-    ax.scatter(*zip(*lista2), s=1, c='r')
-    ax.scatter(*zip(*lista3), s=1, c='g')
-    ax.scatter(*zip(*lista4), s=1, c='k')
-    #plt.show()
-    for i in range(-100, 200, 4):
-        print(i)    
-if __name__ == "__main__":
-    main()
+
+
+            ## For testing the goal point must be in the ego's lane
+            temp_ego_lane_ID = ad.map.lane.getLane(tempLaneID.lanePoint.paraPoint.laneId)
+            print(temp_ego_lane_ID)
+            print(temp_ego_lane_ID.id)
+            if true:
+                left_lane_info = temp_ego_lane_ID.edgeLeft.ecefEdge
+                right_lane_info = temp_ego_lane_ID.edgeRight.ecefEdge
+                edge_left_geo_points =  [ad.map.point.toGeo(p) for p in left_lane_info]
+                edge_left_enu_points =  [ad.map.point.toENU(p) for p in edge_left_geo_points]
+                edge_right_geo_points = [ad.map.point.toGeo(p) for p in right_lane_info]
+                edge_right_enu_points = [ad.map.point.toENU(p) for p in edge_right_geo_points]
+                #for idx in range(0, size(edge_left_enu_points)):
+                    #print(edge_left_enu_points[idx].x)
+                    #print(edge_left_enu_points[idx].y)
+                    #print("###########")
+                    #print(edge_right_enu_points[idx].x)
+                    #print(edge_right_enu_points[idx].y)
+        

@@ -1,0 +1,31 @@
+aorta_demo_node:
+  ros__parameters:
+    use_sim_time: false
+    trajectory:
+      vehicle_00: [-145.00003051757812, -91.40]                                                                             
+      vehicle_01: [-151.99981689453125, -91.39]                                                                             
+      vehicle_02: [-159.00003051757812, -91.40]                                                                             
+      vehicle_03: [-145.00006103515625, -94.89]
+      vehicle_04: [-152.00003051757812, -94.89]
+      vehicle_05: [-158.99981689453125, -94.89]                                 
+      vehicle_06: [-124.23885345458984, -76.06] 
+      vehicle_07: [-124.61363220214844, -68.29]                                                                             
+      vehicle_08: [-124.23243713378906, -61.44]                                                                               
+      vehicle_09: [-135.0028839111328,  -75.29]                                                                                 
+      vehicle_10: [-135.2001190185547,  -68.44]                                                                               
+      vehicle_11: [-135.140380859375,   -61.74]                                                                                 
+      vehicle_12: [-134.5,              -126.03]
+    speed:
+      vehicle_00: 4.0 
+      vehicle_01: 4.0
+      vehicle_02: 4.0
+      vehicle_03: 4.0
+      vehicle_04: 4.0
+      vehicle_05: 4.0
+      vehicle_06: 0.0
+      vehicle_07: 0.0
+      vehicle_08: 0.0
+      vehicle_09: 10.0
+      vehicle_10: 5.0
+      vehicle_11: 2.0
+      vehicle_12: 80.0

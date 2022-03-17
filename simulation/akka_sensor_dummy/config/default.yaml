@@ -1,0 +1,8 @@
+akka_sensor_dummy_node:
+  ros__parameters:
+    use_sim_time: false
+    topics:
+      publisher:
+        akka: "/aorta/sensors/akka/tof"
+        tuk: "/aorta/sensors/tuk/tof"
+      

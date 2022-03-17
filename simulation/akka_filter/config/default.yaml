@@ -1,0 +1,22 @@
+akka_filter_node:
+  ros__parameters:
+    use_sim_time: false
+    topics:
+      publisher:
+        gnss: "/aorta/car_info/filtered/akka/gnss"
+        trajectory: "/aorta/trajectory/filtered/akka"
+        objects: "/aorta/car_info/filtered/akka/objects"
+      subscriber:
+        trajectory: "/aorta/trajectory/akka"
+        gnss: "/aorta/car_info/akka/gnss"
+        objects: "/aorta/car_info/akka/objects"
+    communication:
+      objects:
+        drop_probability: 0.0
+        delay_probability: 0.0
+        delay_time_ms: 0
+      trajectory:
+        drop_probability: 0.0
+        delay_probability: 0.0
+        delay_time_ms: 0
+      

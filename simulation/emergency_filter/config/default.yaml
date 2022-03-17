@@ -1,0 +1,18 @@
+emergency_filter_node:
+  ros__parameters:
+    use_sim_time: false
+    topics:
+      publisher:
+        trajectory: "/aorta/trajectory/filtered/emergency"
+      subscriber:
+        trajectory: "/aorta/trajectory/emergency"
+    communication:
+      objects:
+        drop_probability: 0.0
+        delay_probability: 0.0
+        delay_time_ms: 0
+      trajectory:
+        drop_probability: 0.0
+        delay_probability: 0.0
+        delay_time_ms: 0
+      

@@ -1,0 +1,20 @@
+aorta_demo_node:
+  ros__parameters:
+    use_sim_time: false
+    trajectory:
+      emergency: [36.5, 120.0, 36.5, 145.0, 80.0, 146.0]
+      emergency: [36.5, 120.0, 36.5, 145.0, 80.0, 146.0]
+      vehicle_00: [33.0, 140.0, 33.0, 143.0]
+      vehicle_02: [40.0, 136.0, 40.0, 139.0]
+      altran: [33.0, 134.0, 33.0, 137.0]
+      vehicle_03: [40.0, 130.0, 40.0, 133.0]
+      vehicle_01: [33.0, 128.0, 33.0, 131.0]
+      vehicle_04: [40.0, 124.0, 40.0, 127.0]
+    speed:
+      vehicle_00: 5.0
+      vehicle_02: 5.0
+      altran: 5.0
+      vehicle_03: 5.0
+      vehicle_01: 5.0
+      vehicle_04: 5.0
+      emergency_00: 30.0

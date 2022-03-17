@@ -1,0 +1,27 @@
+car_default_node:
+  ros__parameters:
+    use_sim_time: false
+    topics:
+      subscriber:
+        trajectory: "/aorta/trajectory/filtered/default"
+      publisher:
+        control: "/carla/default/vehicle_control_cmd"
+        waypoint: "/carla/default/waypoints"
+        waypoint_speed: "/carla/default/speed_command"
+    car:
+      speed: 10.0
+    misbehave: false 
+    # Params have to be a double array for this to work
+    # so make sure to use a float array in the params section
+    # even for single values.
+    misbehave_params:
+      ignore_trajectory: 
+          probability: 0.3
+      delayed_reaction: 
+          params: [300.0] # milliseconds
+          probability: 0.3
+      randomize_trajectory:
+          probability: 0.3
+      randomize_speed:
+          params: [30.0] # scale to multiply by a random float 
+          probability: 0.1

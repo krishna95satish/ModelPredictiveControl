@@ -1,0 +1,22 @@
+tuk_filter_node:
+  ros__parameters:
+    use_sim_time: false
+    topics:
+      publisher:
+        gnss: "/aorta/car_info/filtered/tuk/gnss"
+        trajectory: "/aorta/trajectory/filtered/tuk"
+        objects: "/aorta/car_info/filtered/tuk/objects"
+      subscriber:
+        trajectory: "/aorta/trajectory/tuk"
+        gnss: "/aorta/car_info/tuk/gnss"
+        objects: "/aorta/car_info/tuk/objects"
+    communication:
+      objects:
+        drop_probability: 0.0
+        delay_probability: 0.0
+        delay_time_ms: 0
+      trajectory:
+        drop_probability: 0.0
+        delay_probability: 0.0
+        delay_time_ms: 0
+      

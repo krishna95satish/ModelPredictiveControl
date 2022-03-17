@@ -1,0 +1,21 @@
+# ----------------- BEGIN LICENSE BLOCK ---------------------------------
+#
+# Copyright (C) 2017-2020 Intel Corporation
+#
+# SPDX-License-Identifier: MIT
+#
+# ----------------- END LICENSE BLOCK -----------------------------------
+cmake_minimum_required(VERSION 3.5)
+
+project(libosmium-download NONE)
+
+include(ExternalProject)
+ExternalProject_Add(libosmium-download
+  URL https://github.com/osmcode/libosmium/archive/v2.13.1.tar.gz
+  SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/libosmium-src
+  BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/libosmium-build
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND ""
+  INSTALL_COMMAND ""
+  TEST_COMMAND ""
+)

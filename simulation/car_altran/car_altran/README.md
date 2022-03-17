@@ -1,0 +1,79 @@
+# car_altran
+## Interfaces
+### Publishes:
+<table>
+    <tr>
+        <td>Type</td>
+        <td>Topic</td>
+    </tr>
+    <tr>
+        <td>NavSatFix</td>
+        <td>'/aorta/car_info/altran/gnss'</td>
+    </tr>
+    <tr>
+        <td>ObjectList</td>
+        <td>'/aorta/car_info/altran/objects'</td>
+    </tr>
+    <tr>
+        <td>CarlaEgoVehicleControl</td>
+        <td>'/carla/altran/vehicle_control_cmd'</td>
+    </tr>
+    <tr>
+        <td>Path</td>
+        <td>'/carla/altran/waypoints'</td>
+    </tr>
+    <tr>
+        <td>Float64</td>
+        <td>'/carla/altran/speed_command'</td>
+    </tr>
+</table>
+
+### Subscribes to:
+<table>
+    <tr>
+        <td>Type</td>
+        <td>Topic</td>
+        <td>Callback</td>
+    </tr>
+    <tr>
+        <td>Trajectory</td>
+        <td>'/aorta/trajectory/filtered/altran'</td>
+        <td>trajectory_callback</td>
+    </tr>
+    <tr>
+        <td>Image</td>
+        <td>'/carla/altran/rgb_front/image'</td>
+        <td>image_callback</td>
+    </tr>
+    <tr>
+        <td>CameraInfo</td>
+        <td>'/carla/altran/rgb_front/camera_info'</td>
+        <td>camera_info_callback</td>
+    </tr>
+    <tr>
+        <td>PointCloud2</td>
+        <td>'/carla/altran/lidar'</td>
+        <td>lidar_callback</td>
+    </tr>
+    <tr>
+        <td>NavSatFix</td>
+        <td>'/carla/altran/gnss'</td>
+        <td>carla_gnss_callback</td>
+    </tr>
+    <tr>
+        <td>Odometry</td>
+        <td>'/carla/altran/odometry'</td>
+        <td>odometry_callback</td>
+    </tr>
+    <tr>
+        <td>CarlaEgoVehicleStatus</td>
+        <td>'/carla/altran/vehicle_status'</td>
+        <td>ego_vehicle_callback</td>
+    </tr>
+    <tr>
+        <td>CarlaEgoVehicleInfo</td>
+        <td>'/carla/altran/vehicle_info'</td>
+        <td>ego_wheels_callback</td>
+    </tr>
+</table>
+

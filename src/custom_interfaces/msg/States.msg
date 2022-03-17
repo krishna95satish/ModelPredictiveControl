@@ -1,8 +1,0 @@
-float32 initial_state_x
-float32 initial_state_y
-float32 initial_state_v
-float32 initial_state_theta
-float32 final_state_x
-float32 final_state_y
-float32 final_state_v
-float32 final_state_theta

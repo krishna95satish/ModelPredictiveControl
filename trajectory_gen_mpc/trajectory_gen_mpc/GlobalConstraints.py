@@ -48,9 +48,6 @@ class MpcTunableParameters(NamedTuple):
     weight_state_8:     float     # Penality on theta(Terminal)
     weight_control_1:   float     # Penality on acceleration
     weight_control_2:   float     # Penality on steeringAngle
-    weight_slackvar_x:  float     # Penality on Slack variable on X axis
-    weight_slackvar_y:  float     # Penality on Slack variable on Y axis
-    lambda_weight:      float     # Weight on lambda for slack variables
     weight_delta:       float     # Penality on change in steering angle
     Time_delta:         float     # delta T in seconds
 
@@ -78,4 +75,3 @@ class UpdatedVehicleConstraints:
     map_y_min    = None
     throttle_max = None
     throttle_min = None
-    

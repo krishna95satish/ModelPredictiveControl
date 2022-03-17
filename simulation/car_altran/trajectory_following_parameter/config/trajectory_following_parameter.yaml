@@ -1,0 +1,31 @@
+trajectory_following_parameter_node:
+  ros__parameters:
+    use_sim_time: false
+    car_control:
+      # set parameter for PID in lateral direction
+      # Proportional term based on error of heading angle
+      qrg_v: 0
+      # Proportional term based on error of distance
+      qrg_bfryt: 0.3
+      # Differential term based on error of distance
+      qrg_bfrydt: 0
+      # Integral term based on error of distance
+      qrg_bfryit: 0
+      # feedforward gain
+      qrg_ff: -1.0 
+      # set parameter for disturbance observer
+      qrg_sgs: 0 
+      # set parameter for PID in longitudinal direction
+      # Proportional term based on error of speed
+      lrg_bfrt: 2  
+      # Differential term based on error of speed
+      lrg_bfrdt: 0 
+      # Integral term based on error of speed
+      lrg_bfrit: 0.2 
+      # Proportional term based on error of distance
+      lrg_bfrxt: 0.1 
+      # Differential term based on error of distance
+      lrg_bfrxdt: 0 
+      # Integral term based on error of distance
+      lrg_bfrxit: 0 
+      

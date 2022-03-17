@@ -1,0 +1,19 @@
+float32 initial_state_x
+float32 initial_state_y
+float32 initial_state_v
+float32 initial_state_theta
+float32 final_state_x
+float32 final_state_y
+float32 final_state_v
+float32 final_state_theta
+float32 map_x_max
+float32 map_x_min
+float32 map_y_max
+float32 map_y_min
+float32 throttle_max
+float32 throttle_min
+float32 obstacle_state_x
+float32 obstacle_state_y
+float32 obstacle_velocity_x
+float32 obstacle_velocity_y
+

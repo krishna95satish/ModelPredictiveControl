@@ -1,0 +1,11 @@
+ros_bridge_addon_node:
+  ros__parameters:
+    use_sim_time: false
+    topics:
+      subscriber:
+        traffic_light: "/aorta/control/traffic_light/control"
+    carla:
+      host: "127.0.0.1"
+      port: 2000
+    service:
+      radius: 10.0

@@ -1,0 +1,12 @@
+car_emergency_node:
+  ros__parameters:
+    use_sim_time: false
+    topics:
+      subscriber:
+        trajectory: "/aorta/trajectory/filtered/emergency"
+      publisher:
+        waypoint: "/carla/emergency/waypoints"
+        waypoint_speed: "/carla/emergency/speed_command"
+    car:
+      speed: 30.0
+      

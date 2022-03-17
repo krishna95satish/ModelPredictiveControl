@@ -1,0 +1,83 @@
+# aorta_server
+## Interfaces
+### Publishes:
+<table>
+    <tr>
+        <td>Type</td>
+        <td>Topic</td>
+    </tr>
+    <tr>
+        <td>Trajectory</td>
+        <td>'/aorta/trajectory/altran'</td>
+    </tr>
+    <tr>
+        <td>Trajectory</td>
+        <td>'/aorta/trajectory/akka'</td>
+    </tr>
+    <tr>
+        <td>Trajectory</td>
+        <td>'/aorta/trajectory/tuk'</td>
+    </tr>
+    <tr>
+        <td>Trajectory</td>
+        <td>'/aorta/trajectory/default'</td>
+    </tr>
+    <tr>
+        <td>Trajectory</td>
+        <td>'/aorta/trajectory/emergency'</td>
+    </tr>
+    <tr>
+        <td>TrafficLightProgram</td>
+        <td>'/aorta/control/traffic_light/program'</td>
+    </tr>
+</table>
+
+### Subscribes to:
+<table>
+    <tr>
+        <td>Type</td>
+        <td>Topic</td>
+        <td>Callback</td>
+    </tr>
+    <tr>
+        <td>NavSatFix</td>
+        <td>'/aorta/car_info/filtered/altran/gnss'</td>
+        <td>gnss_callback</td>
+    </tr>
+    <tr>
+        <td>ObjectList</td>
+        <td>'/aorta/car_info/filtered/altran/objects'</td>
+        <td>objects_callback</td>
+    </tr>
+    <tr>
+        <td>NavSatFix</td>
+        <td>'/aorta/car_info/filtered/akka/gnss'</td>
+        <td>gnss_callback</td>
+    </tr>
+    <tr>
+        <td>ObjectList</td>
+        <td>'/aorta/car_info/filtered/akka/objects'</td>
+        <td>objects_callback</td>
+    </tr>
+    <tr>
+        <td>NavSatFix</td>
+        <td>'/aorta/car_info/filtered/tuk/gnss'</td>
+        <td>gnss_callback</td>
+    </tr>
+    <tr>
+        <td>ObjectList</td>
+        <td>'/aorta/car_info/filtered/tuk/objects'</td>
+        <td>objects_callback</td>
+    </tr>
+    <tr>
+        <td>ObjectList</td>
+        <td>'/aorta/edge/objects'</td>
+        <td>edge_callback</td>
+    </tr>
+    <tr>
+        <td>CarlaTrafficLightStatusList</td>
+        <td>'/carla/traffic_lights/status'</td>
+        <td>traffic_light_callback</td>
+    </tr>
+</table>
+

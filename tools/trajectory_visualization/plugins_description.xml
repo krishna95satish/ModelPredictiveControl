@@ -1,0 +1,27 @@
+<library path="trajectory_visualization_plugin">
+
+    <!-- Displays plugins -->
+
+    <class
+            name="trajectory_visualization_plugin/Trajectory"
+            type="trajectory_visualization::TrajectoryDisplay"
+            base_class_type="rviz_common::Display"
+    >
+        <description>
+            Convert a trajectory to markers and display them.
+        </description>
+        <message_type>custom_messages/msg/Trajectory</message_type>
+    </class>
+
+    <class
+            name="trajectory_visualization_plugin/Trajectories"
+            type="trajectory_visualization::TrajectoriesDisplay"
+            base_class_type="rviz_common::Display"
+    >
+        <description>
+            Convert all trajectories to markers and displays them.
+        </description>
+        <message_type>custom_messages/msg/Trajectories</message_type>
+    </class>
+
+</library>
