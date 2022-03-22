@@ -5,6 +5,7 @@
    Publishes  : NA 
 """
 from typing import NamedTuple
+from enum import Enum
 
 
 class VehicleConstraints(NamedTuple):
@@ -60,11 +61,7 @@ class StaticObstacleParameters(NamedTuple):
 
 class DynamicObstacleParameters(NamedTuple):
     # This class constaints the ostacle positions and velocities 
-    position_x:         float
-    position_y:         float
     obstacle_diameter:  float
-    velocity_x:         float
-    velocity_y:         float
     Time_delta:         float
 
 class UpdatedVehicleConstraints:
@@ -75,3 +72,8 @@ class UpdatedVehicleConstraints:
     map_y_min    = None
     throttle_max = None
     throttle_min = None
+
+class ObstacleType(Enum):
+    """Enum class used to diffenciate static vs dynamic obstacles"""
+    static_obstacle  = 1
+    dynamic_obstacle = 2

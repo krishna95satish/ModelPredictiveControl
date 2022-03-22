@@ -12,8 +12,20 @@ float32 map_y_max
 float32 map_y_min
 float32 throttle_max
 float32 throttle_min
-float32 obstacle_state_x
-float32 obstacle_state_y
-float32 obstacle_velocity_x
-float32 obstacle_velocity_y
+float32 obstacle_1_state_x
+float32 obstacle_1_state_y
+float32 obstacle_1_velocity_x
+float32 obstacle_1_velocity_y
+float32 obstacle_2_state_x
+float32 obstacle_2_state_y
+float32 obstacle_2_velocity_x
+float32 obstacle_2_velocity_y
+float32 obstacle_3_state_x
+float32 obstacle_3_state_y
+float32 obstacle_3_velocity_x
+float32 obstacle_3_velocity_y
+float32 obstacle_4_state_x
+float32 obstacle_4_state_y
+float32 obstacle_4_velocity_x
+float32 obstacle_4_velocity_y
 

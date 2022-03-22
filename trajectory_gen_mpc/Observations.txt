@@ -1,0 +1,12 @@
+1. if the goal point is very far away then it might get stuck locally (better to keep the goal points nearby).
+2. Fix Static Obstacles and Dynamic obstacles code. - done
+3. Focus should be on creating atleast one scenario. - done
+    a. 4 cars, leaving way for the middle car to move
+        1. Create a simplified version where 4 cars are spawned and adjust the collition avoidance radius such that the ego moves in b/w them - done
+        2. Create dynmaic obstacles after subpoint "1" has been implemented - done
+4. Get info about Aorta and add it in report
+5. Think about how to cmpare MPC with existing approach / How to pitch this as a exploritory analysis.
+6. Cleanup the documentation according to Professors advice
+7. Things introduced as 
+    1. Slack vars - have a workable solution in Matlab, due to time constraints cannot do it in ROS
+    2. Map Boundaries - No time

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
+from logging import raiseExceptions
 import casadi as cd
 from trajectory_gen_mpc.Solver import Solver
+from trajectory_gen_mpc.GlobalConstraints import ObstacleType
 
 class MultipleShooting(Solver):
     def __init__(self, car_object, obstacle_list=None) -> None:
@@ -22,6 +24,8 @@ class MultipleShooting(Solver):
         self.Z = []
         self.T = []
         self.solver = None
+        self.obstacle_start_idx = 0
+        self.obstacle_type = ObstacleType
         self.solver_options = None
         self.optimization_variables = []
 
@@ -40,7 +44,7 @@ class MultipleShooting(Solver):
         self.num_of_controls = self.car.get_num_control()
         self.prediction_horizon = tunable_parameters.prediction_horizon
         self.X = cd.SX.sym('X', self.num_of_states, (tunable_parameters.prediction_horizon+1))
-        self.P = cd.SX.sym('P', self.num_of_states + self.num_of_states + 4)                           # 4 -> obstacle position x, y , v_x and v_y  
+        self.P = cd.SX.sym('P', self.num_of_states + self.num_of_states + (4*4))                           # 4 * (4 cars) -> obstacle position x, y , v_x and v_y  
         self.U = cd.SX.sym('U', self.num_of_controls, tunable_parameters.prediction_horizon)
         self.Q = cd.diagcat(tunable_parameters.weight_state_1, tunable_parameters.weight_state_2,
                             tunable_parameters.weight_state_3, tunable_parameters.weight_state_4)      # weight matrix on states (x, y, v, theta)
@@ -75,31 +79,41 @@ class MultipleShooting(Solver):
 
     def setup_obstacles(self, prediction_horizon, ego_vehicle_diameter, state_X, P_vector):
         # This methods initiates the obstacles if there are any provided in obstacle list in constructor
-        
         if (self.obstacle_list != None):
             for idx in range(len(self.obstacle_list)):
-                self.obstacle_list[idx].set_collision_avoidance_constraints(                                         # Similar to Dynamic 
-                    prediction_horizon, ego_vehicle_diameter, state_X, P_vector)
-                obstacle_constraints, lower_bounds, upper_bounds = self.obstacle_list[idx].get_collision_avoidance_constraints(
-                )
+                if (self.obstacle_list[idx].get_obstacle_type() == self.obstacle_type.dynamic_obstacle):
+                    start_idx, end_idx = self.dynamic_obstacle_helper()
+                    self.obstacle_list[idx].set_collision_avoidance_constraints(prediction_horizon, ego_vehicle_diameter, state_X, P_vector[start_idx : end_idx])
+                    obstacle_constraints, lower_bounds, upper_bounds = self.obstacle_list[idx].get_collision_avoidance_constraints()
+                    for constraints in obstacle_constraints:
+                        self.constraints_vector = cd.vertcat(self.constraints_vector, constraints)
+                    self.lb_constraints_vector = cd.vertcat(self.lb_constraints_vector, lower_bounds)
+                    self.ub_constraints_vector = cd.vertcat(self.ub_constraints_vector, upper_bounds)
 
-                for constraints in obstacle_constraints:
-                    self.constraints_vector = cd.vertcat(
-                        self.constraints_vector, constraints)
-                self.lb_constraints_vector = cd.vertcat(
-                    self.lb_constraints_vector, lower_bounds)
-                self.ub_constraints_vector = cd.vertcat(
-                    self.ub_constraints_vector, upper_bounds)
+                elif (self.obstacle_list[idx].get_obstacle_type() == self.obstacle_type.static_obstacle):
+                    self.obstacle_list[idx].set_collision_avoidance_constraints(prediction_horizon, ego_vehicle_diameter, state_X)
+                    obstacle_constraints, lower_bounds, upper_bounds = self.obstacle_list[idx].get_collision_avoidance_constraints()
+                    for constraints in obstacle_constraints:
+                        self.constraints_vector = cd.vertcat(self.constraints_vector, constraints)
+                    self.lb_constraints_vector = cd.vertcat(self.lb_constraints_vector, lower_bounds)
+                    self.ub_constraints_vector = cd.vertcat(self.ub_constraints_vector, upper_bounds)
         else:
             # DO Nothing since there are no obstacles
             pass
+    
+    def dynamic_obstacle_helper(self):
+        """Helper function which produces the right indexes for many obstacles"""
+        start_idx = self.obstacle_start_idx
+        end_idx = start_idx + 4
+        self.obstacle_start_idx = end_idx
+        return start_idx, end_idx
 
     def set_constraints(self):
         # Constaints for Multiple Shooting technique and Obstacle avaidance
 
         self.lb_constraints_vector = cd.DM.zeros((self.num_of_states*(self.prediction_horizon+1), 1))
         self.ub_constraints_vector = cd.DM.zeros((self.num_of_states*(self.prediction_horizon+1), 1))
-        self.set_terminal_constraints()
+        #self.set_terminal_constraints()
 
     def set_terminal_constraints(self):
         temp_lb_terminal_constraints = cd.DM.zeros(self.num_of_states, 1)
@@ -133,9 +147,6 @@ class MultipleShooting(Solver):
             st_next_motion_model = temp_state + \
                 self.T/6*(k1 + 2*k2 + 2*k3 + k4)
             self.constraints_vector = cd.vertcat(self.constraints_vector, temp_next_state - st_next_motion_model)
-        # Trerminal costs
-        self.objective += (temp_state - self.P[4:8]).T @ self.TC @ (temp_state - self.P[4:8])
-        self.constraints_vector = cd.vertcat(self.constraints_vector, temp_state - self.P[4:8])
 
     def formulate_NLP(self):
 

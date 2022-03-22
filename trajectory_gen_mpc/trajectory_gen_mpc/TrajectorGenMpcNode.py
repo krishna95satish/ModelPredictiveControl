@@ -36,8 +36,8 @@ class TrajectoryGenMpcNode(Node):
         vehicle_constrinats = VehicleConstraints(2.8,                              # wheel base (BMW GrandTourer)
                                                  1.0,                              # acc_max
                                                  -1.0,                             # acc_min
-                                                 (pi/6),                           # steering_max 
-                                                 -(pi/6),                          # steering_min
+                                                 (pi/3),                           # steering_max 
+                                                 -(pi/3),                          # steering_min
                                                  cd.inf,                              # x_max
                                                  -cd.inf,                             # x_min
                                                  cd.inf,                              # y_max
@@ -46,7 +46,7 @@ class TrajectoryGenMpcNode(Node):
                                                  -cd.inf,                             # v_min
                                                  cd.inf,                              # theta_max
                                                  -cd.inf,                             # theta_min
-                                                 3.5                               # ego_vehicle_diameter
+                                                 4.0                               # ego_vehicle_diameter
                                                  )
 
         solver_options = SolverOptions(2000,                                       # max_iter
@@ -55,37 +55,65 @@ class TrajectoryGenMpcNode(Node):
                                        1e-3,                                       # acceptable_objective_change_tolerance
                                        0                                           # print_time
                                        )
-        self.mpc_tunable_parameters = MpcTunableParameters(40,                     # prediction_horizon
+        self.mpc_tunable_parameters = MpcTunableParameters(50,                     # prediction_horizon
                                                            300,                    # weight_on_x
                                                            300,                    # weight_on_y
                                                            100,                    # weight_on_v
-                                                           500,                    # weight_on_theta
+                                                           50,                    # weight_on_theta
                                                            1000,                    # weight_on_x(T)
                                                            1000,                    # weight_on_y(T)
-                                                           1000,                    # weight_on_v(T)
-                                                           1000,                    # weight_on_theta(T)
+                                                           0,                    # weight_on_v(T)
+                                                           0,                    # weight_on_theta(T)
                                                            1000,                   # weight_on_acceleration
                                                            1000,                   # weight_on_steering_angle
                                                            1000,                   # weight_on_change_in_steering_angle(Negates oscillatory behaviour)
-                                                           0.5                     # delta_T
+                                                           0.1                     # delta_T
                                                            )
-        static_obstacle1_parameter = StaticObstacleParameters(-1205.0,             # position_x 
-                                                              -910.4,              # position_y
-                                                              4.5                  # obstacle_diameter (Audi TT)
+        static_obstacle1_parameter = StaticObstacleParameters(38.5,             # position_x 
+                                                              133.0,              # position_y
+                                                              3.3                  # obstacle_diameter (Audi TT)
                                                               )
-        dynamic_obstacle1_parameter = DynamicObstacleParameters(-2.0,              # position_x
-                                                                0.8,               # position_y
-                                                                3.0,               # obstacle_diameter (Audi TT)
-                                                                0.0,               # velocity_x
-                                                                0.0,               # velocity_y
+        static_obstacle2_parameter = StaticObstacleParameters(38.5,             # position_x 
+                                                              125.0,              # position_y
+                                                              3.3                  # obstacle_diameter (Audi TT)
+                                                              )
+        static_obstacle3_parameter = StaticObstacleParameters(34.5,             # position_x 
+                                                              133.0,              # position_y
+                                                              3.3                  # obstacle_diameter (Audi TT)
+                                                              )       
+        static_obstacle4_parameter = StaticObstacleParameters(34.5,             # position_x 
+                                                              125.0,              # position_y
+                                                              3.3                  # obstacle_diameter (Audi TT)
+                                                              )                                                                                                                                 
+        dynamic_obstacle1_parameter = DynamicObstacleParameters(
+                                                                3.5,               # obstacle_diameter (Audi TT)
                                                                 0.1                # delta_T (rate at which we are recieving info from CARLA)
                                                                 )
-
+        dynamic_obstacle2_parameter = DynamicObstacleParameters(
+                                                                3.5,               # obstacle_diameter (Audi TT)
+                                                                0.1                # delta_T (rate at which we are recieving info from CARLA)
+                                                                )
+        dynamic_obstacle3_parameter = DynamicObstacleParameters(
+                                                                3.5,               # obstacle_diameter (Audi TT)
+                                                                0.1                # delta_T (rate at which we are recieving info from CARLA)
+                                                                )
+        dynamic_obstacle4_parameter = DynamicObstacleParameters(
+                                                                3.5,               # obstacle_diameter (Audi TT)
+                                                                0.1                # delta_T (rate at which we are recieving info from CARLA)
+                                                                )
         obstacle_list = []
         #static_obstacle1 = StaticObstacle(static_obstacle1_parameter)
+        #static_obstacle2 = StaticObstacle(static_obstacle2_parameter)
+        #static_obstacle3 = StaticObstacle(static_obstacle3_parameter)
+        #static_obstacle4 = StaticObstacle(static_obstacle4_parameter)
         dynamic_obstacle1 = DynamicObstacle(dynamic_obstacle1_parameter)
-        #obstacle_list.append(static_obstacle1)
+        dynamic_obstacle2 = DynamicObstacle(dynamic_obstacle2_parameter)
+        dynamic_obstacle3 = DynamicObstacle(dynamic_obstacle3_parameter)
+        dynamic_obstacle4 = DynamicObstacle(dynamic_obstacle4_parameter)
         obstacle_list.append(dynamic_obstacle1)
+        obstacle_list.append(dynamic_obstacle2)
+        obstacle_list.append(dynamic_obstacle3)
+        obstacle_list.append(dynamic_obstacle4)
 
         self.car_altran = NonHolonomic(vehicle_constrinats)
         self.multiple_shooting_solver = MultipleShooting(self.car_altran, obstacle_list)
@@ -105,11 +133,27 @@ class TrajectoryGenMpcNode(Node):
                               states.final_state_v,
                               states.final_state_theta]
                              )
-        object_position = cd.DM([states.obstacle_state_x,
-                                states.obstacle_state_y,
-                                states.obstacle_velocity_x,
-                                states.obstacle_velocity_y]
+        object_1_position = cd.DM([states.obstacle_1_state_x,
+                                states.obstacle_1_state_y,
+                                states.obstacle_1_velocity_x,
+                                states.obstacle_1_velocity_y]
                                 )
+        object_2_position = cd.DM([states.obstacle_2_state_x,
+                                states.obstacle_2_state_y,
+                                states.obstacle_2_velocity_x,
+                                states.obstacle_2_velocity_y]
+                                )
+        object_3_position = cd.DM([states.obstacle_3_state_x,
+                                states.obstacle_3_state_y,
+                                states.obstacle_3_velocity_x,
+                                states.obstacle_3_velocity_y]
+                                )
+        object_4_position = cd.DM([states.obstacle_4_state_x,
+                                states.obstacle_4_state_y,
+                                states.obstacle_4_velocity_x,
+                                states.obstacle_4_velocity_y]
+                                )
+
         self.updated_vehicle_constraints.map_x_max = states.map_x_max
         self.updated_vehicle_constraints.map_x_min = states.map_x_min
         self.updated_vehicle_constraints.map_y_max = states.map_y_max
@@ -134,9 +178,12 @@ class TrajectoryGenMpcNode(Node):
             'lbx': lbx,
             'ubx': ubx
         }
-        args['p'] = cd.vertcat(state_init,      # current state
-                               state_target,    # target state
-                               object_position  # obstacle position
+        args['p'] = cd.vertcat(state_init,        # current state
+                               state_target,      # target state
+                               object_1_position,  # obstacle 1 position
+                               object_2_position,  # obstacle 2 position
+                               object_3_position,  # obstacle 3 position
+                               object_4_position  # obstacle 4 position                                                                                             
                                )
         args['x0'] = cd.vertcat(cd.reshape(self.predicted_states, self.car_altran.get_num_states() * (self.mpc_tunable_parameters.prediction_horizon+1), 1),
                                 cd.reshape(self.u0, self.car_altran.get_num_control(

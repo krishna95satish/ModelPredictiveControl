@@ -62,7 +62,7 @@ def generate_launch_description():
         ),
         launch.actions.DeclareLaunchArgument(
             name='ego_vehicle_role_name',
-            default_value=str(["altran", "vehicle_00"])
+            default_value=str(["altran", "vehicle_01", "vehicle_02", "vehicle_03", "vehicle_04"])
         ),
         launch.actions.IncludeLaunchDescription(
             launch.launch_description_sources.PythonLaunchDescriptionSource(

@@ -24,12 +24,7 @@ class DynamicObstacle(Obstacle):
         self.set_position(obstacle_parameters)
 
     def set_position(self, obstacle_parameters):
-
-        self.position_x = obstacle_parameters.position_x
-        self.position_y = obstacle_parameters.position_y
         self.obstacle_diameter = obstacle_parameters.obstacle_diameter
-        self.velocity_x = obstacle_parameters.velocity_x
-        self.velocity_y = obstacle_parameters.velocity_y
         self.delta_T = obstacle_parameters.Time_delta
 
     def set_collision_avoidance_constraints(self, prediction_horizon, ego_vehicle_diameter, state_X, P_vector):
@@ -56,3 +51,6 @@ class DynamicObstacle(Obstacle):
 
     def get_collision_avoidance_constraints(self):
         return self.obstacle_constraints, self.lower_bound_constraints, self.upper_bound_constraints
+    
+    def get_obstacle_type(self):
+        return self.obstacle_type.dynamic_obstacle
